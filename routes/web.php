@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemListingController;
+use App\Http\Controllers\ListingPhotoController;
 
 Route::get('/', fn () => redirect()->route('login'));
 
@@ -15,4 +17,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/home', fn () => view('home'))->name('home');
+    Route::resource('my-items', ItemListingController::class)
+    ->parameters(['my-items' => 'listing'])
+    ->names('listings');
+    Route::get('/listing-photos/{photo}', [ListingPhotoController::class, 'show'])->name('photos.show');
 });
