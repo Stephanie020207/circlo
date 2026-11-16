@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemListingController;
 use App\Http\Controllers\ListingPhotoController;
+use App\Http\Controllers\ExploreController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', fn () => redirect()->route('login'));
 
@@ -16,7 +18,9 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/home', fn () => view('home'))->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/explore', [ExploreController::class, 'index'])->name('explore.index');
+    Route::get('/explore/{listing}', [ExploreController::class, 'show'])->name('explore.show');
     Route::resource('my-items', ItemListingController::class)
     ->parameters(['my-items' => 'listing'])
     ->names('listings');
