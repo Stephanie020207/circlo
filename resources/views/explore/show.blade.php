@@ -57,7 +57,8 @@
                 </button>
             @else
                 {{-- Wired to the request form (UI-11) in the next feature --}}
-                <a href="#"><x-button class="w-full">Borrow / Rent</x-button></a>
+                <a href="{{ route('requests.create', $listing) }}"><x-button class="w-full">Borrow /
+                        Rent</x-button></a>
             @endif
         </div>
     </div>

@@ -16,7 +16,8 @@
                 $links = [
                     'Home' => '/home',
                     'Explore' => '/explore',
-                    'My Transactions' => '/transactions',
+                    'My Transactions' => '/my-transactions',
+                    'Incoming Requests' => '/requests',
                     'My Items' => '/my-items',
                 ];
             @endphp

@@ -6,6 +6,8 @@ use App\Http\Controllers\ItemListingController;
 use App\Http\Controllers\ListingPhotoController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SharingRequestController;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/', fn () => redirect()->route('login'));
 
@@ -25,4 +27,12 @@ Route::middleware('auth')->group(function () {
     ->parameters(['my-items' => 'listing'])
     ->names('listings');
     Route::get('/listing-photos/{photo}', [ListingPhotoController::class, 'show'])->name('photos.show');
+    Route::get('/explore/{listing}/request', [SharingRequestController::class, 'create'])->name('requests.create');
+    Route::post('/explore/{listing}/request', [SharingRequestController::class, 'store'])->name('requests.store');
+    Route::get('/requests/{sharingRequest}', [SharingRequestController::class, 'show'])->name('requests.show');
+    Route::post('/requests/{sharingRequest}/accept', [SharingRequestController::class, 'accept'])->name('requests.accept');
+    Route::post('/requests/{sharingRequest}/reject', [SharingRequestController::class, 'reject'])->name('requests.reject');
+    Route::delete('/requests/{sharingRequest}', [SharingRequestController::class, 'cancel'])->name('requests.cancel');
+    Route::get('/my-transactions', [TransactionController::class, 'index'])->name('transactions.index');
+    Route::get('/requests', [SharingRequestController::class, 'index'])->name('requests.index');
 });
