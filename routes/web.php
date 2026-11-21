@@ -8,6 +8,7 @@ use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SharingRequestController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', fn () => redirect()->route('login'));
 
@@ -35,4 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/requests/{sharingRequest}', [SharingRequestController::class, 'cancel'])->name('requests.cancel');
     Route::get('/my-transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/requests', [SharingRequestController::class, 'index'])->name('requests.index');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });

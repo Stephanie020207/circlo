@@ -30,7 +30,7 @@
                 @endforeach
             </nav>
             <div class="mt-auto text-sm text-slate-300">
-                {{ auth()->user()->name }}
+                <a href="{{ route('profile.show') }}" class="hover:text-white">{{ auth()->user()->name }}</a>
                 <form method="POST" action="{{ route('logout') }}" class="mt-2">
                     @csrf
                     <button type="submit" class="text-slate-400 hover:text-white">Log out</button>
